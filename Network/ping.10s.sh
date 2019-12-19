@@ -8,7 +8,7 @@
 # Authors: (Trung Đinh Quang) trungdq88@gmail.com and (Grant Sherrick) https://github.com/thealmightygrant
 
 MAX_PING=10000
-SITES=(google.com youtube.com wikipedia.org github.com imgur.com)
+SITES=(google.com)
 
 #grab ping times for all sites
 SITE_INDEX=0
@@ -49,16 +49,16 @@ SD=$(echo "sqrt ( $AVG_DEVS )" | bc -l | awk '{printf "%d\n", $1}')
 
 # Define color
 COLOR="#cc3b3b"
-MSG="$AVG"'±'"$SD"'⚡'
+MSG="$AVG"'⚡'
 
-if [ $AVG -ge 1000 ]; then
+if [ $AVG -ge $MAX_PING ]; then
     COLOR="#acacac"
     MSG=" ☠ "
-elif [ $AVG -ge 600 ] && [ $AVG -lt 1000 ]; then
+elif [ $AVG -ge 1000 ] && [ $AVG -lt $MAX_PING ]; then
     COLOR="#cc673b"
-elif [ $AVG -ge 300 ] && [ $AVG -lt 600 ]; then
+elif [ $AVG -ge 400 ] && [ $AVG -lt 1000 ]; then
     COLOR="#ce8458"
-elif [ $AVG -ge 100 ] && [ $AVG -lt 300 ]; then
+elif [ $AVG -ge 100 ] && [ $AVG -lt 400 ]; then
     COLOR="#6bbb15"
 elif [ $AVG -ge 50 ] && [ $AVG -lt 100 ]; then
     COLOR="#0ed812"
